@@ -2,3 +2,5 @@
 **/build/*
 # But keep a file so git pushes the folder
 !**/build/.gitkeep
+!**/build/CMakeCache.txt
+!**/build/Makefile
