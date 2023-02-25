@@ -1,2 +1,4 @@
+# Exclude every build file
 **/build/*
-!**/build
+# But keep a file so git pushes the folder
+!**/build/.gitkeep
