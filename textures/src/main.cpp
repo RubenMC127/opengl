@@ -56,7 +56,7 @@ unsigned int createProgram() {
         "{\n"
         "   gl_Position = vec4(vertex, 1.0);\n"
         "   fColor = vColor;\n"
-        "   fTexCoords = texCoords;\n" // for some reason they are loaded y-inverted
+        "   fTexCoords = vec2(texCoords.x, 1.0-texCoords.y);\n" // for some reason they are loaded y-inverted
         "}\0";
     // NUL char, basically how you end a char*
 
@@ -161,7 +161,7 @@ int main(void)
 
     // load image
     int texWidth, texHeight, nrChannels;
-    unsigned char* data = stbi_load("textures/wood.jpg", &texWidth, &texHeight, &nrChannels, STBI_rgb_alpha);
+    unsigned char* data = stbi_load("textures/alpaca.jpg", &texWidth, &texHeight, &nrChannels, STBI_rgb_alpha);
     
     unsigned int texture;
     glCreateTextures(GL_TEXTURE_2D, 1, &texture);
@@ -181,7 +181,7 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
         /* Render here */
-        glClearColor(0.5f, 0.1f, 0.3f, 1.0f);
+        glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         // Binding Shader Program
         glUseProgram(program);
