@@ -2,9 +2,9 @@
 
 Personal library with opengl projects.
 
-* opengl_window: barebones template with just a window creation 
-* first_shader_program: barebones template with window and inline shaders creation
-* triangle: template with window+shaders+example of triangle drawing via VAO&VBO
+* **opengl_window**: barebones template with just a window creation 
+* **first_shader_program**: barebones template with window and inline shaders creation
+* **triangle**: template with window+shaders+example of triangle drawing via VAO&VBO
 
 ## Requirements
 * OpenGL 4.5
