@@ -1,3 +1,0 @@
-/home/rubenmc127/Documentos/101programming/cpp/opengl/first_shader/build/CMakeFiles/my_opengl_project.dir
-/home/rubenmc127/Documentos/101programming/cpp/opengl/first_shader/build/CMakeFiles/edit_cache.dir
-/home/rubenmc127/Documentos/101programming/cpp/opengl/first_shader/build/CMakeFiles/rebuild_cache.dir
