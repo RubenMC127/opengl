@@ -1,6 +1,5 @@
 # Exclude every build file
 **/build/*
-# But keep a file so git pushes the folder
-!**/build/.gitkeep
+# Keeping some necessary files to reuse the build folder
 !**/build/CMakeCache.txt
 !**/build/Makefile
