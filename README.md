@@ -9,7 +9,8 @@ Personal library with opengl projects.
 ![](resources/aplaca_on_triangle.png)
 * **transformations**: Alpaca Cube screen saver :P
 
-https://user-images.githubusercontent.com/34980801/221407081-7e38f9d7-26db-401b-8831-35ada8c8e429.mp4
+<video src="resources/alpaca_cube.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 ## Requirements
 * OpenGL 4.5
