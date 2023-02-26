@@ -4,7 +4,11 @@
 #include <vector>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include <glm/glm.hpp>
+// transformations
 #include <glm/gtc/matrix_transform.hpp>
+// matrix types, to pass them as args to the shader
+#include <glm/gtc/type_ptr.hpp>
 
 void processInput(GLFWwindow* window)
 {
@@ -95,6 +99,7 @@ unsigned int createProgram() {
     glAttachShader(program, vertexShader);
     glAttachShader(program, fragmentShader);
     glLinkProgram(program);
+
     glGetProgramiv(program, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(program, 1024, NULL, errorLog);
@@ -108,7 +113,7 @@ unsigned int createProgram() {
     return program;
 }
 
-vector<float> makeTriangle() {
+std::vector<float> makeTriangle() {
     // x,y,z,s,t
     std::vector<float> vertices = { {
         -0.25f, -0.25f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -118,7 +123,7 @@ vector<float> makeTriangle() {
     return vertices;
 }
 
-vector<float> makeCube() {
+std::vector<float> makeCube() {
     //Make Cube
 	//x,y,z,s,t
 	std::vector<float> vertices = { {
@@ -175,8 +180,8 @@ vector<float> makeCube() {
 
 int main(void)
 {
-    int width = 640;
-    int height = 480;
+    int width = 1980;
+    int height = 1080;
     float aspectRatio = (float) width / (float) height;
     GLFWwindow* window = initialize(width, height);
 
@@ -231,6 +236,12 @@ int main(void)
     glTextureParameteri(texture, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     stbi_image_free(data);
 
+    // framebuffer
+    glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
+    glEnable(GL_DEPTH_TEST);
+    glm::mat4 projection_transform = glm::perspective(45.0f, aspectRatio, 0.1f, 10.0f);
+    glUniformMatrix4fv(glGetUniformLocation(program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_transform));
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -238,9 +249,19 @@ int main(void)
         processInput(window);
         /* Poll for and process events */
         glfwPollEvents();
+
+        //update transform
+        float angle = glm::radians(static_cast<float>(10 * glfwGetTime()));
+        glm::mat4 model_transform = glm::mat4(1.0f);
+        model_transform = glm::translate(model_transform, { 0.0f, 0.0f, -1.6f });
+        model_transform = glm::rotate(model_transform, angle, { 1.0f, 0.0f, 0.0f });
+        model_transform = glm::rotate(model_transform, 2 * angle, { 0.0f, 1.0f, 0.0f });
+        model_transform = glm::rotate(model_transform, 3 * angle, { 0.0f, 0.0f, 1.0f });
+        //(shader location, matrix count, transpose, matrices)
+        glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_FALSE, glm::value_ptr(model_transform));
+
         /* Render here */
-        glClearColor(0.25f, 0.5f, 0.75f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Binding Shader Program
         glUseProgram(program);
         // texture
