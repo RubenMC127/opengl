@@ -7,8 +7,9 @@ Personal library with opengl projects.
 * **triangle**: template with window+shaders+example of triangle drawing via VAO&VBO
 * **textures**: triangle with textures, amazing rgb alpaca:\
 ![](resources/aplaca_on_triangle.png)
-* **transformations**: Alpaca Cube screen saver :P\
-![](https://user-images.githubusercontent.com/34980801/221407081-7e38f9d7-26db-401b-8831-35ada8c8e429.mp4)
+* **transformations**: Alpaca Cube screen saver :P
+
+https://user-images.githubusercontent.com/34980801/221407081-7e38f9d7-26db-401b-8831-35ada8c8e429.mp4
 
 ## Requirements
 * OpenGL 4.5
